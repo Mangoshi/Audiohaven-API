@@ -4,9 +4,9 @@
   "description": "API for Audiohaven, Professional Practice Project",
   "main": "server.js",
   "scripts": {
-    "start" : "node server.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev" : "nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -19,9 +19,11 @@
   },
   "homepage": "https://github.com/Mangoshi/Audiohaven-API#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^14.2.0",
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.7"
   },
   "devDependencies": {

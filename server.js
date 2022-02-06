@@ -1,15 +1,17 @@
-// initialise express package as constant
+// initialise express package as constant (import Express.js)
 const express = require('express')
-// initialise cors package as constant
+// initialise cors package as constant (import CORS library)
 const cors = require('cors')
+// import jsonwebtoken as 'jwt'
+const jwt = require('jsonwebtoken')
 
-// initialise dotenv package
+// initialise dotenv package (environment variables)
 require('dotenv').config()
-// initialise db.js
+// initialise db.js (import database config)
 require('./db')()
 
 // initialise userController methods
-const { getAllUsers, getUser, addUser } = require('./controllers/user_controller')
+const { registerUser, loginUser, loginRequired, getAllUsers, getUser, addUser } = require('./controllers/user_controller')
 
 // the port express will use (port number from environment variable OR 3000)
 const port = process.env.PORT || 3000
@@ -21,11 +23,48 @@ app.use(cors())
 // app will always use JSON
 app.use(express.json())
 
-//  Routing  //
+// defining middleware to run on requests prior to routing
+app.use((req, res, next) => {
+    // IF headers exist,
+    // AND authorisation headers exists,
+    // AND the first index of authorisation headers split (with <Space> character as a separator), is equal to 'Bearer'
+    if(req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer'){
+        // Using jsonwebtoken.verify to check if the second index of the authorisation-header split (the token) is valid
+        // It checks this against our secret key, and then runs a callback function to see if everything went okay or not
+        jwt.verify(req.headers.authorization.split(' ')[1],'audiohaven', (error, decode) => {
+            // if there's an error, set request.user to undefined
+            if(error) req.user = undefined
+            // otherwise, set request.user to equal the decoded version of the token (username/email/_id)
+            req.user = decode
+            // move on to the next thing (in this case it's routing, but it could be other middleware)
+            next()
+        })
+    }
+    // if not...
+    else {
+        // make request's user parameter undefined
+        req.user = undefined
+        // move on to routing
+        next()
+    }
+})
+
+//  Unauthorised Routing  //
+//  No token required :)  //
 app.get('/', (req, res) => { res.json('Welcome to Audiohaven API!') })
-app.get('/users', getAllUsers)
-app.get('/users/:id', getUser)
-app.post('/users', addUser)
+app.post('/register', registerUser)
+app.post('/login', loginUser)
+
+//  Authorized Routing  //
+//  Must have token! :O  //
+app.get('/users/:id', loginRequired, getUser)
+
+//  Admin Routing(?)  //
+//  Must have admin token(?) :(  //
+// TODO: Either make these require and admin account, or remove altogether
+app.get('/users', loginRequired, getAllUsers)
+app.post('/users', loginRequired, addUser)
+
 
 //  Listening  //
 app.listen(port, () => {
