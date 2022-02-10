@@ -12,7 +12,6 @@ const userSchema = new Schema({
     email: {
         type: String,
         // email has to be unique
-        // TODO: Find out why unique email isn't working; can register two users with matching credentials.
         unique: true,
         // email will be stored in lowercase
         lowercase: true,

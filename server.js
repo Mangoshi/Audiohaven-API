@@ -65,6 +65,9 @@ app.get('/users/:id', loginRequired, getUser)
 app.get('/users', loginRequired, getAllUsers)
 app.post('/users', loginRequired, addUser)
 
+// API Routing //
+app.use('/spotify', require('./routes/spotify'))
+
 
 //  Listening  //
 app.listen(port, () => {
