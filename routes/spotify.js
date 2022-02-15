@@ -36,7 +36,29 @@ router.get('/login', function(req, res) {
 	res.cookie(stateKey, state);
 
 	// your application requests authorization
-	let scope = 'user-read-private user-read-email';
+	let scope =
+		// Users //
+		'user-read-private ' + // token will allow user to access their private details
+		'user-read-email ' + // token will allow user to access their email
+		// Library //
+		'user-library-read ' + // token will allow user to read their library
+		'user-library-modify ' + // token will allow user to modify their library
+		// Follow //
+		'user-follow-read ' + // token will allow user to read their follows
+		'user-follow-modify ' + // token will allow user to modify their follows
+		// Listening History //
+		'user-top-read ' + // token will allow user to read their top music
+		'user-read-recently-played ' + // token will allow user to read their recently played
+		// Playlists //
+		'playlist-read-private ' + // token will allow user to read their private playlists
+		'playlist-modify-private ' + // token will allow user to modify their private playlists
+		'playlist-modify-public ' + // token will allow user to modify their public playlists
+		'playlist-read-collaborative ' + // token will allow user to read their collaborative playlists
+		// Spotify Connect //
+		'user-read-playback-state ' + // token will allow user to read their player's state
+		'user-modify-playback-state ' + // token will allow user to control their player's state
+		'user-read-currently-playing'; // token will allow user to read their currently playing content
+
 	res.redirect('https://accounts.spotify.com/authorize?' +
 		querystring.stringify({
 			response_type: 'code',

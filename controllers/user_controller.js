@@ -2,6 +2,8 @@ const User = require('../models/user_schema')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+//TODO: Function for updating user so Spotify token can be saved
+
 const registerUser = (req, res) => {
     // assign newUser to a new User Object from user_schema, using the request body
     let newUser = new User(req.body)
