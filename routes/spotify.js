@@ -9,6 +9,34 @@ const client_id = process.env.SPOTIFY_CLIENT_ID; // Your client id
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET; // Your secret
 const redirect_uri = "http://localhost:3000/spotify/callback"; // Your redirect uri
 
+// initialise userController methods
+// const { getUser } = require('../controllers/user_controller')
+//
+// const User = require('../models/user_schema')
+// const id = User.
+
+// User.findOneAndUpdate(
+// 	{ _id: id },
+// 	{ "tokens.spotify.access_token" : access_token, "tokens.spotify.refresh_token" : refresh_token }
+// )
+
+// const updateToken = (req, res, access_token, refresh_token) => {
+// 	getUser(id)
+// 	User.findById(req.params.id)
+// 		.then((data) =>{
+// 			if(data){
+// 				res.status(200).json(data)
+// 			}
+// 			else{
+// 				res.status(404).json(`User with id: ${req.params.id} not found!`)
+// 			}
+// 		})
+// 		.catch((err)=>{
+// 			console.error(err)
+// 			res.status(500).json(err)
+// 		})
+// }
+
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
@@ -117,13 +145,13 @@ router.get('/callback', function(req, res) {
 				});
 
 				// we can also pass the token to the browser to make requests from there
-				res.redirect('/#' +
+				res.redirect('http://localhost:8080/spotify?' + // Redirects to playground/spotify
 					querystring.stringify({
 						access_token: access_token,
 						refresh_token: refresh_token
 					}));
 			} else {
-				res.redirect('/#' +
+				res.redirect('http://localhost:8080/spotify?' + // Redirects to playground/spotify
 					querystring.stringify({
 						error: 'invalid_token'
 					}));

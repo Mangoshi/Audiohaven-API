@@ -57,6 +57,25 @@ const loginUser = (req, res) => {
         })
 }
 
+// const updateToken = (id, access_token, refresh_token) => {
+//     User.findOneAndUpdate(
+//         { _id: id },
+//         { "tokens.spotify.access_token" : access_token, "tokens.spotify.refresh_token" : refresh_token }
+//     )
+//         .then((data) =>{
+//             if(data){
+//                 res.status(200).json(data)
+//             }
+//             else{
+//                 res.status(404).json(`User with id: ${req.params.id} not found!`)
+//             }
+//         })
+//         .catch((err)=>{
+//             console.error(err)
+//             res.status(500).json(err)
+//         })
+// }
+
 //// Router -> Controller Middleware ////
 const loginRequired = (req, res, next) => {
     // If the user exists, move on
@@ -147,5 +166,6 @@ module.exports = {
     loginRequired,
     getAllUsers,
     getUser,
-    addUser
+    addUser,
+    // updateToken
 }

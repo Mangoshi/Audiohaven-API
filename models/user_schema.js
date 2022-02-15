@@ -22,6 +22,14 @@ const userSchema = new Schema({
         type: String,
         required: [true, 'Password is required!']
     },
+    spotify: {
+        access_token: {
+            type: String
+        },
+        refresh_token: {
+            type: String
+        }
+    }
 }, {
     // created/updated timestamps will be automatically made
     timestamps: true
