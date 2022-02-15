@@ -145,13 +145,13 @@ router.get('/callback', function(req, res) {
 				});
 
 				// we can also pass the token to the browser to make requests from there
-				res.redirect('http://localhost:8080/spotify?' + // Redirects to playground/spotify
+				res.redirect('http://localhost:8080/spotify?' + // Redirects to playground/spotify (was /#)
 					querystring.stringify({
 						access_token: access_token,
 						refresh_token: refresh_token
 					}));
 			} else {
-				res.redirect('http://localhost:8080/spotify?' + // Redirects to playground/spotify
+				res.redirect('http://localhost:8080/spotify?' + // Redirects to playground/spotify (was /#)
 					querystring.stringify({
 						error: 'invalid_token'
 					}));
