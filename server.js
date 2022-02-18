@@ -11,7 +11,7 @@ require('dotenv').config()
 require('./db')()
 
 // initialise userController methods
-const { registerUser, loginUser, loginRequired, getAllUsers, getUser, addUser } = require('./controllers/user_controller')
+const { registerUser, loginUser, loginRequired } = require('./controllers/user_controller')
 
 // the port express will use (port number from environment variable OR 3000)
 const port = process.env.PORT || 3000
@@ -57,13 +57,13 @@ app.post('/login', loginUser)
 
 //  Authorized Routing  //
 //  Must have token! :O  //
-app.get('/users/:id', loginRequired, getUser)
+// app.get('/users/:id', loginRequired, getUser)
 
 //  Admin Routing(?)  //
 //  Must have admin token(?) :(  //
 // TODO: Either make these require and admin account, or remove altogether
-app.get('/users', loginRequired, getAllUsers)
-app.post('/users', loginRequired, addUser)
+// app.get('/users', loginRequired, getAllUsers)
+// app.post('/users', loginRequired, addUser)
 
 // API Routing //
 app.use('/spotify', require('./routes/spotify'))
@@ -71,5 +71,5 @@ app.use('/spotify', require('./routes/spotify'))
 
 //  Listening  //
 app.listen(port, () => {
-    console.log(`Audiohaven listening at http://localhost:${port}`)
+    console.log(`Audiohaven API is live ^_^`)
 })
