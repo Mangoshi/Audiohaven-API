@@ -7,7 +7,9 @@ const cookieParser = require('cookie-parser'); // CookieParser library
 
 const client_id = process.env.SPOTIFY_CLIENT_ID; // Client ID
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET; // Client secret
-const redirect_uri = "http://audiohaven-api.herokuapp/spotify/callback"; // Redirect URI
+const redirect_uri = "https://audiohaven-api.herokuapp.com/spotify/callback"; // Redirect URI
+
+router.get('/', (req, res) => { res.json('Welcome to the Spotify endpoint! Append /login to proceed..') })
 
 // initialise userController methods
 // const { getUser } = require('../controllers/user_controller')
@@ -145,13 +147,13 @@ router.get('/callback', function(req, res) {
 				});
 
 				// we can also pass the token to the browser to make requests from there
-				res.redirect('http://audiohaven.herokuapp/spotify?' + // Redirects to playground/spotify (was /#)
+				res.redirect('https://audiohaven-sandbox.herokuapp.com/spotify?' + // Redirects to playground/spotify (was /#)
 					querystring.stringify({
 						access_token: access_token,
 						refresh_token: refresh_token
 					}));
 			} else {
-				res.redirect('http://audiohaven.herokuapp/spotify?' + // Redirects to playground/spotify (was /#)
+				res.redirect('https://audiohaven-sandbox.herokuapp.com/spotify?' + // Redirects to playground/spotify (was /#)
 					querystring.stringify({
 						error: 'invalid_token'
 					}));

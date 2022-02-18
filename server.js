@@ -11,7 +11,7 @@ require('dotenv').config()
 require('./db')()
 
 // initialise userController methods
-const { registerUser, loginUser, loginRequired } = require('./controllers/user_controller')
+const { registerUser, loginUser } = require('./controllers/user_controller')
 
 // the port express will use (port number from environment variable OR 3000)
 const port = process.env.PORT || 3000
