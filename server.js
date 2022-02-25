@@ -71,5 +71,5 @@ app.use('/spotify', require('./routes/spotify'))
 
 //  Listening  //
 app.listen(port, () => {
-    console.log(`Audiohaven API is live ^_^`)
+    console.log(`Audiohaven API is live ^_^\nListening at: ${process.env.SERVER_LISTENING_AT}`)
 })
