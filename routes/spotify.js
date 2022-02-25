@@ -1,13 +1,15 @@
 const express = require('express'); // Express web server framework
-const router = express.Router()
+const router = express.Router()     // Express router
 const request = require('request'); // "Request" library
-const cors = require('cors');
-const querystring = require('querystring');
-const cookieParser = require('cookie-parser');
+const cors = require('cors');       // CORS library
+const querystring = require('querystring'); // QueryString library
+const cookieParser = require('cookie-parser'); // CookieParser library
 
 const client_id = process.env.SPOTIFY_CLIENT_ID; // Your client id
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET; // Your secret
-const redirect_uri = "http://localhost:3000/spotify/callback"; // Your redirect uri
+const redirect_uri = process.env.REDIRECT_URI; // Your redirect uri
+
+router.get('/', (req, res) => { res.json('Welcome to the Spotify endpoint! Append /login to proceed..') })
 
 // initialise userController methods
 // const { getUser } = require('../controllers/user_controller')
@@ -145,13 +147,13 @@ router.get('/callback', function(req, res) {
 				});
 
 				// we can also pass the token to the browser to make requests from there
-				res.redirect('http://localhost:8080/spotify?' + // Redirects to playground/spotify (was /#)
+				res.redirect(`${process.env.SPOTIFY_REDIRECT}/spotify?` + // Redirects to playground/spotify (was /#)
 					querystring.stringify({
 						access_token: access_token,
 						refresh_token: refresh_token
 					}));
 			} else {
-				res.redirect('http://localhost:8080/spotify?' + // Redirects to playground/spotify (was /#)
+				res.redirect(`${process.env.SPOTIFY_REDIRECT}/spotify?` + // Redirects to playground/spotify (was /#)
 					querystring.stringify({
 						error: 'invalid_token'
 					}));
