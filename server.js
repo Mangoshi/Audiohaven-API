@@ -55,19 +55,8 @@ app.get('/', (req, res) => { res.json('Welcome to Audiohaven API!') })
 app.post('/register', registerUser)
 app.post('/login', loginUser)
 
-//  Authorized Routing  //
-//  Must have token! :O  //
-// app.get('/users/:id', loginRequired, getUser)
-
-//  Admin Routing(?)  //
-//  Must have admin token(?) :(  //
-// TODO: Either make these require and admin account, or remove altogether
-// app.get('/users', loginRequired, getAllUsers)
-// app.post('/users', loginRequired, addUser)
-
 // API Routing //
 app.use('/spotify', require('./routes/spotify'))
-
 
 //  Listening  //
 app.listen(port, () => {

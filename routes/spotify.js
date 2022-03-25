@@ -11,34 +11,6 @@ const redirect_uri = process.env.REDIRECT_URI; // Your redirect uri
 
 router.get('/', (req, res) => { res.json('Welcome to the Spotify endpoint! Append /login to proceed..') })
 
-// initialise userController methods
-// const { getUser } = require('../controllers/user_controller')
-//
-// const User = require('../models/user_schema')
-// const id = User.
-
-// User.findOneAndUpdate(
-// 	{ _id: id },
-// 	{ "tokens.spotify.access_token" : access_token, "tokens.spotify.refresh_token" : refresh_token }
-// )
-
-// const updateToken = (req, res, access_token, refresh_token) => {
-// 	getUser(id)
-// 	User.findById(req.params.id)
-// 		.then((data) =>{
-// 			if(data){
-// 				res.status(200).json(data)
-// 			}
-// 			else{
-// 				res.status(404).json(`User with id: ${req.params.id} not found!`)
-// 			}
-// 		})
-// 		.catch((err)=>{
-// 			console.error(err)
-// 			res.status(500).json(err)
-// 		})
-// }
-
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
