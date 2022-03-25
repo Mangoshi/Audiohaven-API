@@ -16,7 +16,7 @@ IADT Y3 - Professional Practice Project
 DB_ATLAS_URL=mongodb+srv://<username>:<password>@cluster0.0amnt.mongodb.net/<database>?retryWrites=true&w=majority
 ```
 
-(Optional) You can also set an alternate port the local server will run on with ``PORT=1234`` on a different line.
+(Optional) You can also set an alternate port the local server will run on with e.g. ``PORT=1234`` on a different line.
 
 ## Start server
 
